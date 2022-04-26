@@ -21,7 +21,7 @@ runs:
       shell: bash
     - name: Install powershell module
       shell: pwsh
-      run: Install-Module -Name PowerShellForGitHub -y
+      run: Install-Module -Name PowerShellForGitHub -Confirm:$False
     - name: Get Release 1
       shell: pwsh
       run: |
