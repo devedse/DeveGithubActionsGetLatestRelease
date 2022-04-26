@@ -25,3 +25,9 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: "devedse/DeveCoolLib"
         type: "stable"
+    - name: Test outputs
+      shell: bash
+      run: |
+        echo release: ${{ steps.buildnumber.release }}
+        echo release_id: ${{ steps.buildnumber.release_id }}
+        echo browser_download_url: ${{ steps.buildnumber.browser_download_url }}

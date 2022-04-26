@@ -11,9 +11,12 @@ inputs:
     description: 'Wanted release type (latest, stable, draft, nodraft)'
     required: true
 outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+  release:
+    description: 'Release tag'
+  release_id:
+    description: 'Release Github ID'
+  browser_download_url:
+    description: 'Release first asset download URL'
 runs:
   using: "composite"
   steps:
@@ -21,11 +24,13 @@ runs:
       shell: bash
     - name: Install powershell module
       shell: pwsh
-      run: Install-Module -Name PowerShellForGitHub -Confirm:$False
+      run: Install-Module -Name PowerShellForGitHub -Force
     - name: Get Release 1
       shell: pwsh
       run: |
-        Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}
+        $latestRelease = Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}
+        Write-Host $latestRelease
+        Write-Host "::set-output name=release::$($latestRelease)"
     - name: Get Release 2
       shell: pwsh
       run: .\GetRelease.ps1
