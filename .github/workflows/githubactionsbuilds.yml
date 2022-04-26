@@ -41,7 +41,7 @@ jobs:
       uses: rez0n/actions-github-release@main
       env:
         token: ${{ secrets.GITHUB_TOKEN }}
-        repository: "devedse/EthernalLock-SmartContracts"
+        repository: "devedse/DeveCoolLib"
         type: "stable"
     - name: Test outputs
       shell: bash
