@@ -25,8 +25,7 @@ runs:
     - name: Get Release 1
       shell: pwsh
       run: |
-        $PSDefaultParameterValues["*-GitHub*:AccessToken"] = "${{ inputs.token }}"
-        Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}"
+        Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}
     - name: Get Release 2
       shell: pwsh
       run: .\GetRelease.ps1
