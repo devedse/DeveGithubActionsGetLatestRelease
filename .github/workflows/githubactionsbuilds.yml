@@ -16,10 +16,10 @@ jobs:
   get_latest_version_number_test:
     runs-on: ubuntu-latest
     outputs:
-      build_number: ${{ steps.buildnumber.outputs.build_number }}
+      build_number: ${{ steps.latestrelease.outputs.build_number }}
     steps:
     - name: Get latest version for devedse/DeveCoolLib
-      id: buildnumber
+      id: latestrelease
       uses: devedse/DeveGithubActionsGetLatestRelease@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,6 +28,24 @@ jobs:
     - name: Test outputs
       shell: bash
       run: |
-        echo release: ${{ steps.buildnumber.release }}
-        echo release_id: ${{ steps.buildnumber.release_id }}
-        echo browser_download_url: ${{ steps.buildnumber.browser_download_url }}
+        echo release: ${{ steps.latestrelease.release }}
+        echo release_id: ${{ steps.latestrelease.release_id }}
+        echo browser_download_url: ${{ steps.latestrelease.browser_download_url }}
+  
+  get_latest_version_number_test_existingthing:
+    runs-on: ubuntu-latest
+    outputs:
+      build_number: ${{ steps.latestrelease.outputs.build_number }}
+    steps:
+    - id: latestrelease
+      uses: rez0n/actions-github-release@main
+      env:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: "devedse/EthernalLock-SmartContracts"
+        type: "stable"
+    - name: Test outputs
+      shell: bash
+      run: |
+        echo release: ${{ steps.latestrelease.release }}
+        echo release_id: ${{ steps.latestrelease.release_id }}
+        echo browser_download_url: ${{ steps.latestrelease.browser_download_url }}

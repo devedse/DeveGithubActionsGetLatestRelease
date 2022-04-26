@@ -30,10 +30,8 @@ runs:
       run: |
         $latestRelease = Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}
         Write-Host $latestRelease
-        Write-Host "::set-output name=release::$($latestRelease)"
-    - name: Get Release 2
-      shell: pwsh
-      run: .\GetRelease.ps1
+        Write-Host "::set-output name=release::$($latestRelease.tag_name)"
+        Write-Host "::set-output name=release::$($latestRelease.id)"
     - id: random-number-generator
       run: echo "::set-output name=random-number::$(echo $RANDOM)"
       shell: bash
