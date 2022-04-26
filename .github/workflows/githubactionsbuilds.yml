@@ -1,0 +1,27 @@
+name: GitHubActionsBuilds
+
+on:
+  workflow_dispatch:
+    inputs:
+      createtestdata:
+        description: 'Test value'
+        required: true
+        type: boolean
+        default: true
+  push:
+    branches:
+      - '**'
+
+jobs:
+  generate_version_number:
+    runs-on: ubuntu-latest
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
+    steps:
+    - name: Generate build number
+      id: buildnumber
+      uses: devedse/DeveGithubActionsGetLatestRelease@master
+      env:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: "devedse/DeveCoolLib"
+        type: "stable"
