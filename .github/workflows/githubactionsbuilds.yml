@@ -21,7 +21,7 @@ jobs:
     - name: Get latest version for devedse/DeveCoolLib
       id: buildnumber
       uses: devedse/DeveGithubActionsGetLatestRelease@master
-      env:
+      with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: "devedse/DeveCoolLib"
         type: "stable"
