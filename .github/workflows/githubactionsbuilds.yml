@@ -28,9 +28,9 @@ jobs:
     - name: Test outputs
       shell: bash
       run: |
-        echo release: ${{ steps.latestrelease.release }}
-        echo release_id: ${{ steps.latestrelease.release_id }}
-        echo browser_download_url: ${{ steps.latestrelease.browser_download_url }}
+        echo release: ${{ steps.latestrelease.outputs.release }}
+        echo release_id: ${{ steps.latestrelease.outputs.release_id }}
+        echo browser_download_url: ${{ steps.latestrelease.outputs.browser_download_url }}
   
   get_latest_version_number_test_existingthing:
     runs-on: ubuntu-latest
@@ -46,6 +46,6 @@ jobs:
     - name: Test outputs
       shell: bash
       run: |
-        echo release: ${{ steps.latestrelease.release }}
-        echo release_id: ${{ steps.latestrelease.release_id }}
-        echo browser_download_url: ${{ steps.latestrelease.browser_download_url }}
+        echo release: ${{ steps.latestrelease.outputs.release }}
+        echo release_id: ${{ steps.latestrelease.outputs.release_id }}
+        echo browser_download_url: ${{ steps.latestrelease.outputs.browser_download_url }}
