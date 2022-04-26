@@ -13,12 +13,12 @@ on:
       - '**'
 
 jobs:
-  generate_version_number:
+  get_latest_version_number_test:
     runs-on: ubuntu-latest
     outputs:
       build_number: ${{ steps.buildnumber.outputs.build_number }}
     steps:
-    - name: Generate build number
+    - name: Get latest version for devedse/DeveCoolLib
       id: buildnumber
       uses: devedse/DeveGithubActionsGetLatestRelease@master
       env:
