@@ -26,12 +26,18 @@ runs:
       shell: pwsh
       run: Install-Module -Name PowerShellForGitHub -Force
     - name: Get Release 1
+      id: latestrelease
       shell: pwsh
       run: |
         $latestRelease = Get-GitHubRelease -Uri https://github.com/${{ inputs.repository }} -Latest -AccessToken ${{ inputs.token }}
         Write-Host $latestRelease
         Write-Host "::set-output name=release::$($latestRelease.tag_name)"
-        Write-Host "::set-output name=release::$($latestRelease.id)"
+        Write-Host "::set-output name=release_id::$($latestRelease.id)"
+    - id: Show outputs
+      run: |
+        echo release: ${{ steps.latestrelease.outputs.release }}
+        echo release_id: ${{ steps.latestrelease.outputs.release_id }}
+        echo browser_download_url: ${{ steps.latestrelease.outputs.browser_download_url }}
     - id: random-number-generator
       run: echo "::set-output name=random-number::$(echo $RANDOM)"
       shell: bash
